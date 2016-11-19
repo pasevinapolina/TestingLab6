@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 public class HomePage {
 
     private By loginLink = By.className("loginurl");
+    private By coursesLink = By.xpath(".//*[@id='expandable_branch_0_courses']/a");
+    private By searchBox = By.id("coursesearchbox");
     private String siteToTest = "http://www.adukacyja.by/";
 
     private final WebDriver driver;
@@ -23,6 +25,20 @@ public class HomePage {
 
     public HomePage loginClick() throws InterruptedException {
         driver.findElement(loginLink).click();
+        Thread.sleep(2000);
+        return this;
+    }
+
+    public HomePage coursesClick() throws InterruptedException {
+        driver.findElement(coursesLink).click();
+        Thread.sleep(2000);
+        return this;
+    }
+
+    public HomePage searchForCourse(String course) throws InterruptedException {
+        coursesClick();
+        driver.findElement(searchBox).sendKeys(course);
+        driver.findElement(searchBox).submit();
         Thread.sleep(2000);
         return this;
     }
