@@ -1,8 +1,10 @@
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.ProxyServer;
 import org.junit.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -39,18 +41,23 @@ public class BrowserMobProxyTest {
 
         WebDriver driver = new ChromeDriver(capabilities);
 
-        // создание HAR с меткой "yandex.ru"
-        server.newHar("yandex.ru");
+        server.newHar("adukacyja.by");
 
-        // открытие страницы
-        driver.get("http://yandex.ru");
+        String login = "";
+        String password = "";
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open().loginClick();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginAs(login, password);
 
         // получение данных HAR
         Har har = server.getHar();
 
         // обработка полученных данных
         try {
-            File file = new File("results\\Test.har");
+            File file = new File("results\\Test2.har");
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -63,15 +70,13 @@ public class BrowserMobProxyTest {
             }
         }
         catch (IOException e) {
-            // обработка ошибки
             e.printStackTrace();
         }
         finally {
             driver.quit();
             server.stop();
         }
-
-        driver.quit();
-        server.stop();
     }
+
+
 }

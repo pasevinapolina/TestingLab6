@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
  */
 public class LoginPage {
 
-    private By usernameLocator = By.id("id_login");
-    private By passwordLocator = By.id("id_password");
-    private By loginButtonLocator = By.xpath(".//*[@id='jsc-submit-button-c36d-c955-']/button");
+    private By usernameLocator = By.id("username");
+    private By passwordLocator = By.id("password");
+    private By loginButtonLocator = By.id("loginbtn");
 
     private final WebDriver driver;
 

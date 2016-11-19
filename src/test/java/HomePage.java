@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class HomePage {
 
-    private By loginLink = By.id("link-head-login");
-    private String siteToTest = "http://eda.ru/";
+    private By loginLink = By.className("loginurl");
+    private String siteToTest = "http://www.adukacyja.by/";
 
     private final WebDriver driver;
 
@@ -15,13 +15,15 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public HomePage open() {
+    public HomePage open() throws InterruptedException {
         driver.get(siteToTest);
+        Thread.sleep(2000);
         return this;
     }
 
-    public HomePage loginClick() {
+    public HomePage loginClick() throws InterruptedException {
         driver.findElement(loginLink).click();
+        Thread.sleep(2000);
         return this;
     }
 
